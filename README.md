@@ -1,5 +1,3 @@
-.... this repository is under construction ....
-
 ## CrowdFlow
 Optical Flow Dataset and Evaluation Kit for Visual Crowd Analysis desciribed in the AVSS 2018 paper 
 [Optical Flow Dataset and Benchmark for Visual Crowd Analysis](http://elvera.nue.tu-berlin.de/files/).
