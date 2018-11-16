@@ -157,12 +157,12 @@ def readFlowFiles(filename):
 def writeFlowFile(filename,flow):
     TAG_STRING = np.array(202021.25, dtype=np.float32)
     assert flow.shape[2] == 2
-    rows = np.array(flow.shape[0], dtype=np.int32)
-    cols = np.array(flow.shape[1], dtype=np.int32)
+    h = np.array(flow.shape[0], dtype=np.int32)
+    w = np.array(flow.shape[1], dtype=np.int32)
     with open(filename, 'wb') as f:
         f.write(TAG_STRING.tobytes())
-        f.write(rows.tobytes())
-        f.write(cols.tobytes())
+        f.write(w.tobytes())
+        f.write(h.tobytes())
         f.write(flow.tobytes())
 
 def flow2RGB(flow, max_flow_mag = 5):
