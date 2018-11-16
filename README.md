@@ -30,13 +30,12 @@ Minimum required python version: 3.4
 
 **Install dependencies on Ubuntu:**
 ```
-sudo apt-get install python3-dev python3-virtualenv virtualenv python3-pip
+sudo apt-get install python3-dev python3-virtualenv virtualenv
 ```
 Create a virtual environment and install python requirements:
 ```
-virtualenv -p python3  --system-site-packages crowdflow_env
+virtualenv -p python3 crowdflow_env
 source crowdflow_env/bin/activate
-pip3 install opencv-python opencv-contrib-python pickle copy glob math 
 ```
 
 **Install OpenCV 3.4:**
@@ -62,7 +61,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D OPENCV_EXTRA_MODULES_PATH=../../contrib/modules \
     -D INSTALL_PYTHON_EXAMPLES=OFF \
     -D INSTALL_C_EXAMPLES=OFF \
-    -D BUILD_EXAMPLES=OFF \ 
+    -D BUILD_EXAMPLES=OFF \
     -D WITH_CUDA=OFF ..
 
 make -j8
@@ -70,15 +69,15 @@ make install -j8
 cd ../../
 ```
 
-**Install Boost 1.66 (or larger):**
+**Install Boost 1.66 (or later):**
 ```
 wget https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.tar.bz2
 tar xfvj boost_1_66_0.tar.bz2
 rm boost_1_66_0.tar.bz2
 mv boost_1_66_0 Boost
 cd Boost
-./bootstrap.sh --with-python=python3 --prefix=../crowdflow_env/
-./b2
+./bootstrap.sh --with-python=python3 --prefix=../crowdflow_env
+./b2 -j 8
 ./b2 install
 cd ..
 ```
@@ -143,7 +142,7 @@ After execution the file *long_term_results.txt* will contain the evaluation res
 ## Results
 To assess the quality of the optical flow we propose to use two types of metrics: i) common optical flow metrics, i.e. average endpoint error (EPE) and percentage of erroneous
 pixel (RX) and ii) long-term motion metrics based on trajectories. An detailed overview of the optical flow parameters can be found in the document: [Supplemental_materials.pdf](./Supplemental_material.pdf)).
-###Common optical flow metrics (short-term)
+### Common optical flow metrics (short-term)
 
 |            |FG (Static)| FG (Static)| BG (Static)|BG (Static) |FG (Dynamic)| FG (Dynamic) | BG (Dynamic)    | BG (Dynamic)     | FG(Avg.)| FG(Avg.)     | BG(Avg.) | BG(Avg.)   |  Avg.  |Avg. || 
 | ---------- | -----  | ----- | ----- | ---- | ----- | ----- | ------ | ----- | ----- | ------ | ----- | ----- | ----- | ----- | ----- |
