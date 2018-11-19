@@ -21,7 +21,9 @@ if (NOT IS_ABSOLUTE ${BOOST_ROOT})
   set(BOOST_ROOT "${CMAKE_CURRENT_BINARY_DIR}/${BOOST_ROOT}")
 endif()
 message(STATUS "${BOOST_ROOT}")
-if(EXISTS "${BOOST_ROOT}/lib/libboost_python34.a")
+if(EXISTS "${BOOST_ROOT}/lib/libboost_python3.a")
+    FIND_PACKAGE(Boost COMPONENTS python3 numpy3)
+elseif(EXISTS "${BOOST_ROOT}/lib/libboost_python34.a")
 	FIND_PACKAGE(Boost COMPONENTS python34 numpy34)
 elseif(EXISTS "${BOOST_ROOT}/lib/libboost_python35.a")
 	FIND_PACKAGE(Boost COMPONENTS python35 numpy35)
@@ -32,7 +34,7 @@ elseif(EXISTS "${BOOST_ROOT}/lib/libboost_python37.a")
 elseif(EXISTS "${BOOST_ROOT}/lib/libboost_python38.a")
 	FIND_PACKAGE(Boost COMPONENTS python38 numpy38)
 else()
-	message(STATUS "Unable to find libboost_python3x.a to specify the correct version. Try default python3 and numpy3")
+	message(STATUS "Unable to find libboost_python3x.a to specify the correct version.")
 endif()
 
 INCLUDE_DIRECTORIES(${OpenCV_INCLUDE_DIRS} include )
@@ -45,9 +47,7 @@ message("Include dirs of Python: " ${PYTHON_INCLUDE_DIRS} "(" ${PYTHONLIBS_VERSI
 
 link_directories(${Boost_LIBRARY_PATH} )
 
-file(GLOB project_sources
-${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
-)
+file(GLOB project_sources ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp )
 
 SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")

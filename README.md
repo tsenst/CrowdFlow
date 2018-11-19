@@ -1,4 +1,4 @@
-## CrowdFlow
+## CrowdFlow Dataset
 Optical Flow Dataset and Evaluation Kit for Visual Crowd Analysis desciribed in the AVSS 2018 paper 
 [Optical Flow Dataset and Benchmark for Visual Crowd Analysis](http://elvera.nue.tu-berlin.de/files/1548Schr%C3%B6der2018.pdf).
 
@@ -14,7 +14,6 @@ If you use the dataset or evaluation kit or think our work is useful in your res
 }
 ```
 
-## Dataset
 Download the dataset via:
 ```
 wget http://ftp01.nue.tu-berlin.de/crowdflow/CrowdFlow.rar
@@ -25,6 +24,8 @@ and unpack it:
 sudo apt-get install unrar
 unrar x CrowdFlow
 ```
+**The CrowdFlow dataset is made available for academic use only.**  
+
 ### Installation
 Minimum required python version: 3.4
 
@@ -36,6 +37,7 @@ Create a virtual environment and install python requirements:
 ```
 virtualenv -p python3 crowdflow_env
 source crowdflow_env/bin/activate
+pip3 install numpy
 ```
 
 **Install OpenCV 3.4:**
@@ -77,7 +79,7 @@ rm boost_1_66_0.tar.bz2
 mv boost_1_66_0 Boost
 cd Boost
 ./bootstrap.sh --with-python=python3 --prefix=../crowdflow_env
-./b2 -j 8
+./b2 -j8
 ./b2 install
 cd ..
 ```
@@ -86,16 +88,16 @@ cd ..
 cd Trajectory
 mkdir build
 cd build
-cmake -D BOOST_ROOT=../crowdflow_env/  ..
+cmake -D BOOST_ROOT=../../crowdflow_env/  ..
 make 
 cd ../..
 ```
 
 ## Evaluation Framework
 To evaluate an optical flow method with the providen framework perform these step:
- * create a new directory in the `/estimate` directory. 
+ * create a new directory in the `/CrowdFlow/estimate` directory. 
  * compute flow fields and save them in *.flo* fileformat with the structure given in by the 
- `/images` directory.  For example optical flow results from the image pair  `/images/IM01/frame_0000.png` and `/images/IM01/frame_0001.png`
+ `/CrowdFlow/images` directory.  For example optical flow results from the image pair  `/CrowdFlow/images/IM01/frame_0000.png` and `/CrowdFlow/images/IM01/frame_0001.png`
  must be stored as `/estimate/[mymethod]/images/IM01/frame_0000.flo
  * run `opticalflow_evaluate.py` to compute EPE and R2 short-term metrics.
  * run `trajectory_evaluate.py` to compute tracking accuracy long-term metrics.
