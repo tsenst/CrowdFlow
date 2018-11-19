@@ -1,21 +1,26 @@
-/** 
- * \file python_module.cpp
- * \brief Python interface
- * \date 23.03.2018
- * \author Tobias Senst
- */
- 
+/*# ---------------------------------------------------------------------
+# Copyright (c) 2018 TU Berlin, Communication Systems Group
+# Written by Tobias Senst <senst@nue.tu-berlin.de>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# ---------------------------------------------------------------------*/
 
 #include <vector>
 #include <deque>
 #include <iostream>
 #include <stdlib.h> 
 #include <boost/python.hpp>
-#include <boost/python/numpy.hpp>
-#include <boost/python/stl_iterator.hpp>
-#include <boost/multiprecision/cpp_int.hpp>
-#include <boost/multiprecision/number.hpp>
-#include "opencv2/ximgproc.hpp" // for struct edge detection
 #include "opencv2/optflow.hpp"
 #include "trajectory_module.h"
 
@@ -36,6 +41,7 @@ class CTrajectory
 		m_Points[0] = pos;
 		m_StartIndex = static_cast<int>(from);
 	};
+
 	void run(const cv::Mat & flow, int index, float scale, bool verbose)
 	{	
 		cv::Rect roi(0,0,flow.cols, flow.rows);
@@ -67,6 +73,7 @@ class CTrajectory
 			}
 		}
 	}
+
 	std::vector<cv::Point2f> m_Points;
 	int m_StartIndex;
 	
@@ -90,44 +97,6 @@ cv::Mat nptocv(np::ndarray src)
 }
 
 
-/*
-void TrajectoryEstimator::python_set_parameter(boost::python::dict & param)
-{
-
-	boost::python::list keys = param.keys(); 
-	for (int i = 0; i < len(keys); ++i) 
-	{  
-	   boost::python::extract<std::string> extracted_key(keys[i]);  
-	   if(!extracted_key.check()){  
-			std::cout<<"Key invalid, map might be incomplete"<<std::endl;  
-			throw(std::runtime_error("Invalid Key"));                 
-	   }  
-	   std::string key = extracted_key;  
-	   boost::python::extract<std::string> extracted_val(param[key]);  
-	   if(extracted_val.check())
-	   {  
-		   parseString(key, extracted_val);
-	   }  
-	
-	}  
-
-}	
-
-void TrajectoryEstimator::parseString(std::string key, std::string val)
-{
-	std::string upper_val = val;
-	std::transform(upper_val.begin(), upper_val.end(), upper_val.begin(), ::toupper);
-	std::transform(key.begin(), key.end(), key.begin(), ::toupper);
-	if ( key == "MODE")
-	{
-		m_Mode = boost::lexical_cast<int>(val);
-	}
-	if ( key == "VERBOSE")
-	{
-		m_Verbose = boost::lexical_cast<int>(val);
-	}
-}
-*/
 py::list TrajectoryEstimator::run(py::list pyOFFilenames, np::ndarray pyPoints, float scale, int verbose)
 {
 	std::vector<CTrajectory> trajectory_list;
@@ -141,9 +110,7 @@ py::list TrajectoryEstimator::run(py::list pyOFFilenames, np::ndarray pyPoints, 
 	for( int i = 0 ; i < len(pyOFFilenames); ++i)
 	{
 		std::string flowFilename = py::extract<std::string>(pyOFFilenames[i]);
-		//std::cout << flowFilename << std::endl;
-		cv::Mat flow = cv::optflow::readOpticalFlow(flowFilename);
-		//std::cout << " Flow Field " << flow.size  << flow.cols << std::endl;
+		cv::Mat flow = cv::optflow::readOpticalFlow(flowFilename);;
 		for( int n = 0; n < trajectory_list.size(); n++)
 		{
 		    if ( verbose > 0 && n == 0)
