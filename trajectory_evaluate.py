@@ -22,7 +22,7 @@ import numpy as np
 import pickle
 import util as ut
 import file_parser as fp
-import trajectory_evaluation as te
+sys.path.append("./Trajectory/build/")
 
 class TrajectoryEvaluator:
     def __init__(self,
@@ -60,7 +60,7 @@ class TrajectoryEvaluator:
             if f["dir"] == sequence_name:
                 filebase = f["basepath"]
 
-                flow_filenames.append(f["estflow"] + f["filename"] + ".flo")
+                flow_filenames.append(f["estflow"])
 
         flow_filenames = sorted(flow_filenames)
         result = dict()
@@ -116,7 +116,7 @@ class TrajectoryEvaluator:
         result["dynamic"] = self.average(dynamic_ret)
         result = {**result, **dynamic_ret}
         result["all"] = self.average({**dynamic_ret, **static_ret})
-        return {file_dict[0]["estimatepath"]: result}
+        return result
 
     def get_statistics(self, basepath):
         static_sequence_name = ["IM01", "IM02", "IM03", "IM04", "IM05"]
@@ -137,13 +137,16 @@ class TrajectoryEvaluator:
 def run_parameter(flow_method, basepath):
 
       basepath_dict = {"basepath": basepath,
-                        "estimate": basepath + "/estimate/" + flow_method + "/",
-                        "images": basepath + "/images/",
-                       }
-      train_filenames, valid_filenames = fp.create_filename_list(basepath_dict)
-      filenames = train_filenames + valid_filenames
-      evaluator = te.TrajectoryEvaluator()
+                         "images" : basepath + "/images/",
+                         "groundtruth": basepath + "/gt_flow/",
+                         "estimate": basepath + "/estimate/" + flow_method + "/",
+                         "masks": basepath + "/masks/",
+                         }
+
+      filenames = fp.create_filename_list(basepath_dict)
+      evaluator = TrajectoryEvaluator()
       ret_dict = evaluator.run(filenames)
+      ret_dict["name"]  = flow_method.replace("/", "")
       return ret_dict
 
 
@@ -151,26 +154,18 @@ def main():
     if len(sys.argv) < 2:
         print("Please provide the first argument. Root path of the CrowdFlow dataset.")
         return
-
-    if len(sys.argv) < 3:
-        print("Please provide the second argument. Directory name containing .")
-        return
-
-    if len(sys.argv) < 3:
-        latex_filename = "long_term_results.txt"
-    else:
-        latex_filename = sys.argv[2]
-
-    if len(sys.argv) < 4:
-        result_filename = "long_term_results.pb"
-    else:
-        result_filename = sys.argv[3]
     basepath = sys.argv[1]
-    result_filename = "long_term_results.pb"
-    method_list = list()
-    method_list.append( "/dual")
-    result_dict = list()
 
+    method_list = list()
+    for n in range(2, len(sys.argv)):
+        method_list.append("/" + sys.argv[n] + "/" )
+
+    latex_filename = "long_term_results.tex"
+    result_filename = "long_term_results.pb"
+
+
+
+    result_dict = list()
 
     for method in method_list:
         result_dict.append(run_parameter(method, basepath))
@@ -178,8 +173,11 @@ def main():
     print("Try to save file ",  result_filename)
     pickle.dump(result_dict, open( result_filename, "wb"))
     print("Person Trajectories")
-    ut.genTrajectoryLatexTable(filename=result_filename, item_key="dense_person")
+    result_str = ut.genTrajectoryLatexTable(filename=result_filename, item_key="dense_person")
     print("Dense Person Trajectories")
-    ut.genTrajectoryLatexTable(filename=result_filename, item_key="person")
+    result_str = result_str + ut.genTrajectoryLatexTable(filename=result_filename, item_key="person")
+    if len(latex_filename) > 0:
+        with open(latex_filename, "w") as f:
+            f.write(result_str)
 
 main()

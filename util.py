@@ -348,7 +348,15 @@ def getLatexTable(filename):
 
     data = pickle.load(open(filename, "rb"))
 
-    str_result = ""
+    str_result = "\\begin{table} \n \\centering " \
+                 "\\begin{tabular}{l|crcr|crcr|crcrcr|r} \n" \
+                 "\\hline \n " \
+                 "\\multicolumn{1}{c|}{} & \\multicolumn{2}{|c}{FG (Static) } & \\multicolumn{2}{c|} { BG (Static)} & " \
+                 "\\multicolumn{2}{|c}{FG (Dynamic)} & \\multicolumn{2}{c|}{ BG (Dynamic)} & " \
+                 "\\multicolumn{2}{c}{FG($\\varnothing$)}&\multicolumn{2}{c}{BG ($\\varnothing$)} & " \
+                 "\\multicolumn{2}{c|}{$\\varnothing$}  \\\\ \n " \
+                 "\\multicolumn{1}{c|}{}& EPE & R2[\\%] & EPE & R2[\\%]& EPE & R2[\\%]& EPE & R2[\\%]" \
+                 "& EPE & R2[\\%]& EPE & R2[\\%]& EPE & R2[\\%] \\\\ \n "
     result_list = data["result"]
     method_result_list = get_sequence_measures(result_list)
     for method_key in method_result_list.keys():
@@ -357,7 +365,8 @@ def getLatexTable(filename):
         ret_static = avg_sequences(sequence_result, 0)
         ret_dynamic = avg_sequences(sequence_result, 1)
         ret_total = avg_sequences(sequence_result, 2)
-
+        name = method_key.replace("/","")
+        name = name.replace("_", "")
         str_out = method_key \
                 + " & {:.3f}".format(ret_static[0]) \
                 + " & {:.2f}".format(ret_static[1]) \
@@ -375,38 +384,53 @@ def getLatexTable(filename):
                 + " & {:.2f}".format(ret_total[5]) \
                 + " \\\ "
         str_result = str_result + str_out + "\n"
+
+    str_result = str_result + "\end{tabular} \n " \
+                              "\\vspace{0.1cm} \n" \
+                              "\\caption{Evaluation results common optical flow metrics. " \
+                              "Dynamic comprised sequences with and static without camera motion, " \
+                              "BG - background motion vectors and FG - motion vectors located at persons of the crowd.} \n" \
+                              "\\end{table}"
     return str_result
 
 def genTrajectoryLatexTable(filename, item_key = "dense_person"):
-    str_result = ""
+
+    str_result = "\n \\begin{table} \n " \
+                 "\\scriptsize \n " \
+                 "\\setlength{\\tabcolsep}{2.4pt} \n " \
+                 "\\centering \n " \
+                 "\\begin{tabular}{l|cc|cc|cc|cc|cc|c} \n " \
+                 " & \\multicolumn{2}{c|}{IM01 (Dyn)} & \\multicolumn{2}{c|}{IM02 (Dyn)} " \
+                 " & \\multicolumn{2}{c|}{IM03 (Dyn)} & \\multicolumn{2}{c|}{IM04 (Dyn)} " \
+                 " & \\multicolumn{2}{c|}{IM05 (Dyn)} &   $\\varnothing$  \\\\ \n" \
+                 "\\hline \n"
     methods = pickle.load(open(filename, "rb"))
+
     for ret in methods:
-        for key in ret[1].keys():
-            result = ret[0]  \
-                     + " & " + "{:2.2f}".format(100 * ret[1][key]["IM01"][item_key][14]) \
-                     + " & " + "{:2.2f}".format(100 * ret[1][key]["IM01_hDyn"][item_key][14]) \
-                     + " & " + "{:2.2f}".format(100 * ret[1][key]["IM02"][item_key][14]) \
-                     + " & " + "{:2.2f}".format(100 * ret[1][key]["IM02_hDyn"][item_key][14]) \
-                     + " & " + "{:2.2f}".format(100 * ret[1][key]["IM03"][item_key][14]) \
-                     + " & " + "{:2.2f}".format(100 * ret[1][key]["IM03_hDyn"][item_key][14]) \
-                     + " & " + "{:2.2f}".format(100 * ret[1][key]["IM04"][item_key][14]) \
-                     + " & " + "{:2.2f}".format(100 * ret[1][key]["IM04_hDyn"][item_key][14]) \
-                     + " & " + "{:2.2f}".format(100 * ret[1][key]["IM05"][item_key][14]) \
-                     + " & " + "{:2.2f}".format(100 * ret[1][key]["IM05_hDyn"][item_key][14]) \
-                     + " & " + "{:2.2f}".format(100 * ret[1][key]["all"][item_key][14]) + "\\\ "
+            result = ret["name"]  \
+                     + " & " + "{:2.2f}".format(100 * ret["IM01"][item_key][14]) \
+                     + " & " + "{:2.2f}".format(100 * ret["IM01_hDyn"][item_key][14]) \
+                     + " & " + "{:2.2f}".format(100 * ret["IM02"][item_key][14]) \
+                     + " & " + "{:2.2f}".format(100 * ret["IM02_hDyn"][item_key][14]) \
+                     + " & " + "{:2.2f}".format(100 * ret["IM03"][item_key][14]) \
+                     + " & " + "{:2.2f}".format(100 * ret["IM03_hDyn"][item_key][14]) \
+                     + " & " + "{:2.2f}".format(100 * ret["IM04"][item_key][14]) \
+                     + " & " + "{:2.2f}".format(100 * ret["IM04_hDyn"][item_key][14]) \
+                     + " & " + "{:2.2f}".format(100 * ret["IM05"][item_key][14]) \
+                     + " & " + "{:2.2f}".format(100 * ret["IM05_hDyn"][item_key][14]) \
+                     + " & " + "{:2.2f}".format(100 * ret["all"][item_key][14]) + "\\\ "
 
             str_result = str_result + result + "\n"
 
-    return result
-
-def genTrajectoryLatexTableV0(filename, item_key = "dense_person"):
-    #filename = "trajectory_result_deep.pb"
-    methods = pickle.load(open(filename, "rb"))
-    for ret in methods:
-        for key in ret[1].keys():
-            result = ret[0]  \
-                         + " & " + "{:2.2f}".format(100*ret[1][key]["static"][item_key][14]) \
-                         + " & " + "{:2.2f}".format(100*ret[1][key]["dynamic"][item_key][14]) \
-                         + " & " + "{:2.2f}".format(100 * ret[1][key]["all"][item_key][14]) + "\\\ "
-
-            print(result)
+    if item_key == "person":
+        name_str = "person trajectories"
+    else:
+        name_str = "dense person trajectories"
+    str_result = str_result + "\\hline \n " \
+                              "\\end{tabular} \n " \
+                              "\\vspace{0.01cm} \n " \
+                              "\\caption{Evaluation results with long-term motion metric (" + name_str + ")" \
+                              "The \\textbf{tracking accuracy} in percentage for the threshold set to 15 pixels. " \
+                              "Higher values denote more accurate results.} \n " \
+                              "\\end{table} \n"
+    return str_result
