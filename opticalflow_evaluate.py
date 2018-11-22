@@ -21,6 +21,7 @@ import sys
 import pickle
 import copy
 import util as ut
+import progressbar
 
 def run_parameter(config_item):
     result = dict()
@@ -50,33 +51,37 @@ def main():
     parameter_list = list()
 
     for n in range(2, len(sys.argv)):
-        parameter_list.append({"flow_method": "/" + sys.argv[n]})
+        parameter_list.append({"flow_method": "/" + sys.argv[n] + "/" })
 
-    latex_filename = "short_term_results.txt"
+    latex_filename = "short_term_results.tex"
     result_filename = "short_term_results.pb"
 
 
-    #basepath = "/data/Senst/AVSS2018/"
-    #result_filename = "Short_Term_Results.pb"
-
     result_list = list()
-    for parameter in parameter_list:
+    bar = progressbar.ProgressBar()
+
+    for n, parameter in enumerate(parameter_list):
         basepath_dict = {"basepath": basepath,
                          "images" : basepath + "/images/",
                          "groundtruth": basepath + "/gt_flow/",
-                         "estimate": basepath + "/estimate/" + parameter["flow_method"],
+                         "estimate": basepath + "/estimate/" + parameter["flow_method"] + "/",
                          "masks": basepath + "/masks/",
                          }
 
         filenames = fp.create_filename_list(basepath_dict)
         config_list = ut.create_config(parameter, filenames)
 
-        for config_item in config_list:
+        bar.start(max_value=len(config_list) * len(parameter_list))
+        for c, config_item in enumerate(config_list):
             result = run_parameter(config_item)
             result_list.append(copy.deepcopy(result))
+            bar.update(c + n * len(config_list))
 
-    out_dict = {"result_list": result_list}
+    bar.finish()
+    print("\n")
+    print("\n")
     print("Save short term evaluation file ",  result_filename)
+    out_dict = {"result": result_list}
     pickle.dump(out_dict, open( result_filename, "wb"))
 
     result_str = ut.getLatexTable(result_filename)

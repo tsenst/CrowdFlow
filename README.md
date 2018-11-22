@@ -37,7 +37,7 @@ Create a virtual environment and install python requirements:
 ```
 virtualenv -p python3 crowdflow_env
 source crowdflow_env/bin/activate
-pip3 install numpy
+pip3 install numpy progressbar2 opencv-contrib-python
 ```
 
 **Install OpenCV 3.4:**
@@ -124,9 +124,10 @@ opticalflow_evaluate.py <dataset_root_path> <dir_name_method_1> <dir_name_method
 Example:
 ```
 source crowdflow_env/bin/activate
-python3 opticalflow_evaluate.py CrowdFlow/ dual
+python3 opticalflow_evaluate.py CrowdFlow/ dual plk farneback
 ```
-After execution the file *short_term_Results.txt* will contain the evaluation results (*method 1 - method n*) in form of a latex table.
+After execution the file *short_term_results.tex* will contain the evaluation results (*method 1 - method n*) in form of a latex table.
+*short_term_results.pb* will contain the evaluation results stored with pickle.
 
 **Long-Term  Evaluate**
 
@@ -137,9 +138,10 @@ trajectory_evaluate.py <dataset_root_path> <dir_name_method_1> <dir_name_method_
 Example:
 ```
 source crowdflow_env/bin/activate
-python3 trajectory_evaluate.py CrowdFlow/ Short_Term_Results.txt Short_Term_Results.pb
+python3 trajectory_evaluate.py CrowdFlow/ dual plk farneback 
 ```
-After execution the file *long_term_results.txt* will contain the evaluation results (*method 1 - method n*) in form of a latex table.
+After execution the file *long_term_results.tex* will contain the evaluation results (*method 1 - method n*) in form of a latex table.
+*long_term_results.pb* will contain the evaluation results stored with pickle.
 
 ## Results
 To assess the quality of the optical flow we propose to use two types of metrics: i) common optical flow metrics, i.e. average endpoint error (EPE) and percentage of erroneous
@@ -187,5 +189,6 @@ pixel (RX) and ii) long-term motion metrics based on trajectories. An detailed o
 
 
 ## Contact
-If you have any questions or encounter problems regarding the method/code feel free to contact me
+If you have any questions or encounter problems regarding the method/code or want to send us your optical flow benchmark 
+results feel free to contact me
 at [senst@nue.tu-berlin.de](mailto:senst@nue.tu-berlin.de)
