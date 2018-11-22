@@ -64,6 +64,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D INSTALL_PYTHON_EXAMPLES=OFF \
     -D INSTALL_C_EXAMPLES=OFF \
     -D BUILD_EXAMPLES=OFF \
+    -DBUILD_opencv_xfeatures2d=OFF \
     -D WITH_CUDA=OFF ..
 
 make -j8
