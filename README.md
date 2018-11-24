@@ -106,13 +106,13 @@ To evaluate an optical flow method with the providen framework perform these ste
 **Optical Flow Samples**
 
 `
-opticalflow_estimate.py <dataset_root_path> 
+opticalflow_estimate.py <dataset_root_path> <flow_method_name_1> <flow_method_name_2> ...
 `
 
 With the following program optical flow fields for the CrowdFlow dataset will be estimated with Dual-TVL1.
 ```
 source crowdflow_env/bin/activate
-python3 opticalflow_estimate.py CrowdFlow/
+python3 opticalflow_estimate.py CrowdFlow/ dual farneback plk
 ```
 The optical flow files will be stored in the directory `/estimate/dual/` . 
 
