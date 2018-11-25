@@ -1,3 +1,4 @@
+![Dataset samples](doc/sample.png)
 ## CrowdFlow Dataset
 Optical Flow Dataset and Evaluation Kit for Visual Crowd Analysis desciribed in the AVSS 2018 paper 
 [Optical Flow Dataset and Benchmark for Visual Crowd Analysis](http://elvera.nue.tu-berlin.de/files/1548Schr%C3%B6der2018.pdf).
