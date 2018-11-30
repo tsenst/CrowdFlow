@@ -25,7 +25,7 @@ and unpack it:
 sudo apt-get install unrar
 unrar x CrowdFlow
 ```
-**The CrowdFlow dataset is made available for academic use only.**  
+**The CrowdFlow dataset is made available for academic use only.** If you wish to use this dataset commercially please contact  [sikora@nue.tu-berlin.de](mailto:sikora@nue.tu-berlin.de).
 
 ### Installation
 Minimum required python version: 3.4
