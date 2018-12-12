@@ -19,7 +19,10 @@ Download the dataset via:
 ```
 wget http://ftp01.nue.tu-berlin.de/crowdflow/CrowdFlow.rar
 ```
-or with this link [http://ftp01.nue.tu-berlin.de/crowdflow/CrowdFlow.rar](http://ftp01.nue.tu-berlin.de/crowdflow/CrowdFlow.rar)
+or use the following direct links
+ - [http://ftp01.nue.tu-berlin.de/crowdflow/CrowdFlow.rar](http://ftp01.nue.tu-berlin.de/crowdflow/CrowdFlow.rar)
+ - [https://tubcloud.tu-berlin.de/s/jENg4fcgeBPwGfN](https://tubcloud.tu-berlin.de/s/jENg4fcgeBPwGfN)
+ 
 and unpack it:
 ```
 sudo apt-get install unrar
