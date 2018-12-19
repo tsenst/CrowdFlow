@@ -1,7 +1,7 @@
 ![Dataset samples](doc/sample.png)
 ## TUB CrowdFlow Dataset
 Optical Flow Dataset and Evaluation Kit for Visual Crowd Analysis developed at [Communication Systems Group](https://www.nue.tu-berlin.de/) at TU-Berlin desciribed in the AVSS 2018 paper 
-[Optical Flow Dataset and Benchmark for Visual Crowd Analysis](http://elvera.nue.tu-berlin.de/files/1548Schr%C3%B6der2018.pdf).
+[Optical Flow Dataset and Benchmark for Visual Crowd Analysis](http://elvera.nue.tu-berlin.de/files/1548Schr%C3%B6der2018.pdf) or [TUBCrowdFlow@arxiv.org](https://arxiv.org/abs/1811.07170).
 
 This evaluation framework is released under the MIT License (details in [LICENSE](LICENSE)).
 If you use the dataset or evaluation kit or think our work is useful in your research, please consider citing:
