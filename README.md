@@ -8,7 +8,7 @@ If you use the dataset or evaluation kit or think our work is useful in your res
 
 ```
 @INPROCEEDINGS{CrowdFlow2018,
-	AUTHOR = {Gregory Schr{\"o}der and Tobias Senst and Erki Bochinski and Thomas Sikora},
+	AUTHOR = {Gregory Schr{\"o}der and Tobias Senst and Erik Bochinski and Thomas Sikora},
 	TITLE = {Optical Flow Dataset and Benchmark for Visual Crowd Analysis},
 	BOOKTITLE = {IEEE International Conference on Advanced Video and Signals-based Surveillance},
 	YEAR = {2018},
