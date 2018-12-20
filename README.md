@@ -20,13 +20,13 @@ Download the dataset via:
 wget http://ftp01.nue.tu-berlin.de/crowdflow/CrowdFlow.rar
 ```
 or use the following direct links
- - [http://ftp01.nue.tu-berlin.de/crowdflow/CrowdFlow.rar](http://ftp01.nue.tu-berlin.de/crowdflow/CrowdFlow.rar)
+ - [http://ftp01.nue.tu-berlin.de/crowdflow/TUBCrowdFlow.rar](http://ftp01.nue.tu-berlin.de/crowdflow/TUBCrowdFlow.rar)
  - [https://tubcloud.tu-berlin.de/s/jENg4fcgeBPwGfN](https://tubcloud.tu-berlin.de/s/jENg4fcgeBPwGfN)
  
 and unpack it:
 ```
 sudo apt-get install unrar
-unrar x CrowdFlow
+unrar x TUBCrowdFlow
 ```
 **The CrowdFlow dataset is made available for academic use only.** If you wish to use this dataset commercially please contact  [sikora@nue.tu-berlin.de](mailto:sikora@nue.tu-berlin.de).
 
@@ -102,7 +102,7 @@ cd ../..
 To evaluate an optical flow method with the providen framework perform these step:
  * create a new directory in the `/CrowdFlow/estimate` directory. 
  * compute flow fields and save them in *.flo* fileformat with the structure given in by the 
- `/CrowdFlow/images` directory.  For example optical flow results from the image pair  `/CrowdFlow/images/IM01/frame_0000.png` and `/CrowdFlow/images/IM01/frame_0001.png`
+ `/TUBCrowdFlow/images` directory.  For example optical flow results from the image pair  `/TUBCrowdFlow/images/IM01/frame_0000.png` and `/TUBCrowdFlow/images/IM01/frame_0001.png`
  must be stored as `/estimate/[mymethod]/images/IM01/frame_0000.flo
  * run `opticalflow_evaluate.py` to compute EPE and R2 short-term metrics.
  * run `trajectory_evaluate.py` to compute tracking accuracy long-term metrics.
@@ -116,7 +116,7 @@ opticalflow_estimate.py <dataset_root_path> <flow_method_name_1> <flow_method_na
 With the following program optical flow fields for the CrowdFlow dataset will be estimated with Dual-TVL1.
 ```
 source crowdflow_env/bin/activate
-python3 opticalflow_estimate.py CrowdFlow/ dual farneback plk
+python3 opticalflow_estimate.py TUBCrowdFlow/ dual farneback plk
 ```
 The optical flow files will be stored in the directory `/estimate/dual/` . 
 
@@ -129,7 +129,7 @@ opticalflow_evaluate.py <dataset_root_path> <dir_name_method_1> <dir_name_method
 Example:
 ```
 source crowdflow_env/bin/activate
-python3 opticalflow_evaluate.py CrowdFlow/ dual plk farneback
+python3 opticalflow_evaluate.py TUBCrowdFlow/ dual plk farneback
 ```
 After execution the file *short_term_results.tex* will contain the evaluation results (*method 1 - method n*) in form of a latex table.
 *short_term_results.pb* will contain the evaluation results stored with pickle.
@@ -143,7 +143,7 @@ trajectory_evaluate.py <dataset_root_path> <dir_name_method_1> <dir_name_method_
 Example:
 ```
 source crowdflow_env/bin/activate
-python3 trajectory_evaluate.py CrowdFlow/ dual plk farneback 
+python3 trajectory_evaluate.py TUBCrowdFlow/ dual plk farneback 
 ```
 After execution the file *long_term_results.tex* will contain the evaluation results (*method 1 - method n*) in form of a latex table.
 *long_term_results.pb* will contain the evaluation results stored with pickle.
