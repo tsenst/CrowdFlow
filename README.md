@@ -7,7 +7,7 @@ This evaluation framework is released under the MIT License (details in [LICENSE
 If you use the dataset or evaluation kit or think our work is useful in your research, please consider citing:
 
 ```
-@INPROCEEDINGS{CrowdFlow2018,
+@INPROCEEDINGS{TUBCrowdFlow2018,
 	AUTHOR = {Gregory Schr{\"o}der and Tobias Senst and Erik Bochinski and Thomas Sikora},
 	TITLE = {Optical Flow Dataset and Benchmark for Visual Crowd Analysis},
 	BOOKTITLE = {IEEE International Conference on Advanced Video and Signals-based Surveillance},
@@ -17,7 +17,7 @@ If you use the dataset or evaluation kit or think our work is useful in your res
 
 Download the dataset via:
 ```
-wget http://ftp01.nue.tu-berlin.de/crowdflow/CrowdFlow.rar
+wget http://ftp01.nue.tu-berlin.de/crowdflow/TUBCrowdFlow.rar
 ```
 or use the following direct links
  - [http://ftp01.nue.tu-berlin.de/crowdflow/TUBCrowdFlow.rar](http://ftp01.nue.tu-berlin.de/crowdflow/TUBCrowdFlow.rar)
@@ -28,7 +28,7 @@ and unpack it:
 sudo apt-get install unrar
 unrar x TUBCrowdFlow
 ```
-**The CrowdFlow dataset is made available for academic use only.** If you wish to use this dataset commercially please contact  [sikora@nue.tu-berlin.de](mailto:sikora@nue.tu-berlin.de).
+**The TUB CrowdFlow dataset is made available for academic use only.** If you wish to use this dataset commercially please contact  [sikora@nue.tu-berlin.de](mailto:sikora@nue.tu-berlin.de).
 
 ### Installation
 Minimum required python version: 3.4
@@ -100,7 +100,7 @@ cd ../..
 
 ## Evaluation Framework
 To evaluate an optical flow method with the providen framework perform these step:
- * create a new directory in the `/CrowdFlow/estimate` directory. 
+ * create a new directory in the `/TUBCrowdFlow/estimate` directory. 
  * compute flow fields and save them in *.flo* fileformat with the structure given in by the 
  `/TUBCrowdFlow/images` directory.  For example optical flow results from the image pair  `/TUBCrowdFlow/images/IM01/frame_0000.png` and `/TUBCrowdFlow/images/IM01/frame_0001.png`
  must be stored as `/estimate/[mymethod]/images/IM01/frame_0000.flo
@@ -113,7 +113,7 @@ To evaluate an optical flow method with the providen framework perform these ste
 opticalflow_estimate.py <dataset_root_path> <flow_method_name_1> <flow_method_name_2> ...
 `
 
-With the following program optical flow fields for the CrowdFlow dataset will be estimated with Dual-TVL1.
+With the following program optical flow fields for the TUB CrowdFlow dataset will be estimated with Dual-TVL1.
 ```
 source crowdflow_env/bin/activate
 python3 opticalflow_estimate.py TUBCrowdFlow/ dual farneback plk
