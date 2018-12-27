@@ -22,7 +22,31 @@ import numpy as np
 import pickle
 import util as ut
 import file_parser as fp
-sys.path.append("./Trajectory/build/")
+
+
+class Trajectory:
+    def __init__(self, pos, from_idx, to_idx):
+        self.points = np.ones(shape=(int(to_idx) - int(from_idx) + 1, 2), dtype=np.float32) * 99999
+        self.points[0,:] = pos
+        self.start_index = int(from_idx)
+
+    def run(self, flow, index):
+        idx = index - self.start_index
+        if idx >= 0 and idx + 1 < self.points.shape[0]:
+            # position is in (x,y)
+            pos = self.points[idx,:]
+            ipos = np.floor(pos).astype(np.int32)
+            if ipos[0] >= 0 and ipos[1] >= 0 and ipos[0] + 1 < flow.shape[1] and ipos[1] + 1 < flow.shape[0]:
+                a = pos - ipos
+                iw00 = (1 - a[0]) * (1 - a[1])
+                iw01 = a[0] * (1 - a[1])
+                iw10 = (1 - a[0]) * a[1]
+                iw11 = 1 - iw00 - iw01 - iw10
+                self.points[idx + 1, :] = pos + \
+                    flow[ipos[1], ipos[0]] * iw00 + \
+                    flow[ipos[1], ipos[0] + 1] * iw01 + \
+                    flow[ipos[1] + 1, ipos[0]] * iw10 + \
+                    flow[ipos[1] + 1, ipos[0] + 1] * iw11
 
 class TrajectoryEvaluator:
     def __init__(self,
@@ -40,14 +64,28 @@ class TrajectoryEvaluator:
         self.threshold_list = copy.deepcopy(thresholds)
 
     def compute_differenz_trajectories(self, flow_filenames, groundtruth_filename):
-        import pytrajectory
         print(" Load ", groundtruth_filename)
         ret = pickle.load(open(groundtruth_filename, "rb"))
         start_points_trajectory = ret["GT_StartPoints"]
         gt_trajectory = ret["GT_Trajectories"]
         print(" Start TrajectoryEstimator ", flow_filenames[0])
-        proc = pytrajectory.TrajectoryEstimator()
-        estimated_trajectory = proc.run(flow_filenames, start_points_trajectory, 0, 0)  # 1.05)
+
+        trajectory_list = list()
+        for r in range(0,start_points_trajectory.shape[0]):
+            trajectory_list.append(Trajectory(pos = (start_points_trajectory[r,3], start_points_trajectory[r,2]) ,
+                                         from_idx = start_points_trajectory[r,0], to_idx= start_points_trajectory[r,1]))
+
+        for i, flow_file in enumerate(flow_filenames):
+            flow = ut.readFlowFiles(flow_file)
+            for trajectory_item in trajectory_list:
+                trajectory_item.run(flow, i)
+
+        estimated_trajectory = list()
+        for trajectory_item in trajectory_list:
+            estimated_trajectory.append(list())
+            for n in range(trajectory_item.points.shape[0]):
+                estimated_trajectory[-1].append(trajectory_item.points[n,1])
+                estimated_trajectory[-1].append(trajectory_item.points[n,0])
 
         return ut.differenz_trajectory_list(gt_trajectory, estimated_trajectory)
 

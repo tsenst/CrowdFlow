@@ -31,7 +31,7 @@ unrar x TUBCrowdFlow
 **The TUB CrowdFlow dataset is made available for academic use only.** If you wish to use this dataset commercially please contact  [sikora@nue.tu-berlin.de](mailto:sikora@nue.tu-berlin.de).
 
 ### Installation
-Minimum required python version: 3.4
+Minimum required python version: 3.5
 
 **Install dependencies on Ubuntu:**
 ```
@@ -42,60 +42,6 @@ Create a virtual environment and install python requirements:
 virtualenv -p python3 crowdflow_env
 source crowdflow_env/bin/activate
 pip3 install numpy progressbar2 opencv-contrib-python
-```
-
-**Install OpenCV 3.4:**
-```
-sudo apt-get install build-essential cmake pkg-config libjpeg8-dev libtiff5-dev libjasper-dev libpng12-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev libgtk-3-dev libatlas-base-dev gfortran python3-dev
-
-wget https://github.com/opencv/opencv_contrib/archive/3.4.0.zip
-unzip 3.4.0.zip
-rm 3.4.0.zip
-mv opencv_contrib-3.4.0 contrib
-
-wget https://github.com/opencv/opencv/archive/3.4.0.zip
-unzip 3.4.0.zip
-rm 3.4.0.zip
-mv opencv-3.4.0 OpenCV
-
-cd OpenCV
-mkdir build
-cd build
-
-cmake -D CMAKE_BUILD_TYPE=RELEASE \
-    -D CMAKE_INSTALL_PREFIX=../../crowdflow_env/  \
-    -D OPENCV_EXTRA_MODULES_PATH=../../contrib/modules \
-    -D INSTALL_PYTHON_EXAMPLES=OFF \
-    -D INSTALL_C_EXAMPLES=OFF \
-    -D BUILD_EXAMPLES=OFF \
-    -DBUILD_opencv_xfeatures2d=OFF \
-    -D WITH_CUDA=OFF ..
-
-make -j8
-make install -j8
-cd ../../
-```
-
-**Install Boost 1.66 (or later):**
-```
-wget https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.tar.bz2
-tar xfvj boost_1_66_0.tar.bz2
-rm boost_1_66_0.tar.bz2
-mv boost_1_66_0 Boost
-cd Boost
-./bootstrap.sh --with-python=python3 --prefix=../crowdflow_env
-./b2 -j8
-./b2 install
-cd ..
-```
-**Compile trajectory estimation module:**
-```
-cd Trajectory
-mkdir build
-cd build
-cmake -D BOOST_ROOT=../../crowdflow_env/  ..
-make 
-cd ../..
 ```
 
 ## Evaluation Framework
