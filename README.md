@@ -113,7 +113,7 @@ pixel (RX) and ii) long-term motion metrics based on trajectories. An detailed o
 |**[Farneback (Farneback2003)](http://www.diva-portal.org/smash/get/diva2:273847/FULLTEXT01.pdf)**   |0.737 |7.21 |0.441 |7.30 |0.996 |12.67 |2.491 |50.60 |0.867 |9.940  |1.466 | 28.95|0.872 |10.13 |    |
 |**[Sparse to Dense PLK (Bouguet2000)](http://robots.stanford.edu/cs223b04/algo_tracking.pdf)** | 0.793 | 8.07 | 0.563 | 9.12 | 1.041 | 13.24 | 2.875 | 56.29 | 0.917 | 10.653 | 1.719 | 32.71 | 0.925 | 10.88 |    |
 
-###Tracking Accuracy (long-term)
+### Tracking Accuracy (long-term)
 
 **Dense Trajectories**
 
