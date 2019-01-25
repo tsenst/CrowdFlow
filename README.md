@@ -114,6 +114,7 @@ pixel (RX) and ii) long-term motion metrics based on trajectories. An detailed o
 |**[Sparse to Dense PLK (Bouguet2000)](http://robots.stanford.edu/cs223b04/algo_tracking.pdf)** | 0.793 | 8.07 | 0.563 | 9.12 | 1.041 | 13.24 | 2.875 | 56.29 | 0.917 | 10.653 | 1.719 | 32.71 | 0.925 | 10.88 |    |
 
 ###Tracking Accuracy (long-term)
+
 **Dense Trajectories**
 
 |           |IM01 |(Dyn) |IM02   |(Dyn)|IM03  |(Dyn) |IM04  |(Dyn) |IM05  |(Dyn) |Avg. |
@@ -143,6 +144,7 @@ pixel (RX) and ii) long-term motion metrics based on trajectories. An detailed o
 |**[DIS2 (Kroeger2016)](https://github.com/tikroeger/OF_DIS)**        | 40.81| 22.39| 22.86| 15.37| 9.05 | 6.72 | 13.63| 9.72 | 17.86| 18.10| 17.65 |
 |**[Farneback (Farneback2003)](http://www.diva-portal.org/smash/get/diva2:273847/FULLTEXT01.pdf)**   | 88.75| 81.33| 64.69| 59.05| 85.92| 87.44| 42.42| 45.35| 71.51| 79.63| 70.61| 
 |**[Sparse to Dense PLK (Bouguet2000)](http://robots.stanford.edu/cs223b04/algo_tracking.pdf)** | 79.31| 66.83| 61.05| 52.41| 82.63| 83.11| 37.92| 36.81| 67.53| 76.18| 64.38|
+|**[NMC (IDREES2014)](https://www.sciencedirect.com/science/article/pii/S0262885613001637)** | 96.96 | 90.33 | 72.18 | 71.44 | 92.28 | 20.70 | 32.72 | 42.38 | 60.15 | 56.02 | 63.52 |
 
 
 ## Contact
@@ -151,6 +153,8 @@ results feel free to contact me
 at [senst@nue.tu-berlin.de](mailto:senst@nue.tu-berlin.de)
 
 ## References
+
+# Optical Flow Algorithm
 
 ```
 @inproceedings
@@ -225,5 +229,19 @@ at [senst@nue.tu-berlin.de](mailto:senst@nue.tu-berlin.de)
   type = {Technical {R}eport},
   publisher = {Intel Corporation Microprocessor Research Labs},
   timestamp = {2013.04.03}
+}
+```
+
+# Person Tracking Algorithm
+
+```
+@article{IDREES2014,
+ title = "Tracking in dense crowds using prominence and neighborhood motion concurrence",
+ journal = "Image and Vision Computing",
+ volume = "32",
+ number = "1",
+ pages = "14 - 26",
+ year = "2014",
+ author = "Haroon Idrees and Nolan Warner and Mubarak Shah",
 }
 ```
