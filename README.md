@@ -152,9 +152,7 @@ If you have any questions or encounter problems regarding the method/code or wan
 results feel free to contact me
 at [senst@nue.tu-berlin.de](mailto:senst@nue.tu-berlin.de)
 
-## References
-
-# Optical Flow Algorithm
+## References - Optical Flow Algorithm
 
 ```
 @inproceedings
@@ -232,7 +230,7 @@ at [senst@nue.tu-berlin.de](mailto:senst@nue.tu-berlin.de)
 }
 ```
 
-# Person Tracking Algorithm
+## References - Person Tracking Algorithm
 
 ```
 @article{IDREES2014,
