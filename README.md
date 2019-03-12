@@ -21,7 +21,7 @@ wget http://ftp01.nue.tu-berlin.de/crowdflow/TUBCrowdFlow.rar
 ```
 or use the following direct links
  - [http://ftp01.nue.tu-berlin.de/crowdflow/TUBCrowdFlow.rar](http://ftp01.nue.tu-berlin.de/crowdflow/TUBCrowdFlow.rar)
- - [https://tubcloud.tu-berlin.de/s/jENg4fcgeBPwGfN](https://tubcloud.tu-berlin.de/s/jENg4fcgeBPwGfN)
+ - [https://tubcloud.tu-berlin.de/s/FrDpjGfGJgPmHzN](https://tubcloud.tu-berlin.de/s/FrDpjGfGJgPmHzN)
  
 and unpack it:
 ```
@@ -29,6 +29,11 @@ sudo apt-get install unrar
 unrar x TUBCrowdFlow
 ```
 **The TUB CrowdFlow dataset is made available for academic use only.** If you wish to use this dataset commercially please contact  [sikora@nue.tu-berlin.de](mailto:sikora@nue.tu-berlin.de).
+
+## Contact
+If you have any questions or encounter problems regarding the method/code or want to send us your optical flow benchmark 
+results feel free to contact me
+at [senst@nue.tu-berlin.de](mailto:senst@nue.tu-berlin.de)
 
 ### Installation
 Minimum required python version: 3.5
@@ -147,10 +152,7 @@ pixel (RX) and ii) long-term motion metrics based on trajectories. An detailed o
 |**[NMC (IDREES2014)](https://www.sciencedirect.com/science/article/pii/S0262885613001637)** | 96.96 | 90.33 | 72.18 | 71.44 | 92.28 | 20.70 | 32.72 | 42.38 | 60.15 | 56.02 | 63.52 |
 
 
-## Contact
-If you have any questions or encounter problems regarding the method/code or want to send us your optical flow benchmark 
-results feel free to contact me
-at [senst@nue.tu-berlin.de](mailto:senst@nue.tu-berlin.de)
+
 
 ## References - Optical Flow Algorithm
 
