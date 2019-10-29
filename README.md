@@ -5,7 +5,7 @@ Optical Flow Dataset and Evaluation Kit for Visual Crowd Analysis developed at [
 
 The Dataset contains 10 sequences showing 5 scenes. Each scene is rendered twice: with a static point of view and a dynamic camera to simulate drone/UAV based surveillance. We render at HD resolution (1280x720) at 25 fps, which is typical for current commercial CCTV surveillance systems. The total number of frames 3200.
 
-For each sequence we provide the following **ground-truth data**:
+For each sequence we provide the following **ground-truth** data:
  * **Optical flow fields** 
  * **Person trajectories (up to 1451)**
  * **Dense pixel trajectories**
@@ -94,7 +94,7 @@ python3 opticalflow_evaluate.py TUBCrowdFlow/ dual plk farneback
 After execution the file *short_term_results.tex* will contain the evaluation results (*method 1 - method n*) in form of a latex table.
 *short_term_results.pb* will contain the evaluation results stored with pickle.
 
-**Long-Term  Evaluate**
+**Long-Term  Evaluation**
 
 Long-term evaluation performs evaluation based on ground-truth trajectories, i.e. **person trajectories** and **dense pixel trajectories** (see paper).
 
