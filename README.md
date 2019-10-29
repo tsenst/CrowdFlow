@@ -1,7 +1,14 @@
 ![Dataset samples](doc/sample.png)
 ## TUB CrowdFlow Dataset
 Optical Flow Dataset and Evaluation Kit for Visual Crowd Analysis developed at [Communication Systems Group](https://www.nue.tu-berlin.de/) at TU-Berlin desciribed in the AVSS 2018 paper 
-[Optical Flow Dataset and Benchmark for Visual Crowd Analysis](http://elvera.nue.tu-berlin.de/files/1548Schr%C3%B6der2018.pdf) or [TUBCrowdFlow@arxiv.org](https://arxiv.org/abs/1811.07170).
+[Optical Flow Dataset and Benchmark for Visual Crowd Analysis](http://elvera.nue.tu-berlin.de/files/1548Schr%C3%B6der2018.pdf) or [TUBCrowdFlow@arxiv.org](https://arxiv.org/abs/1811.07170). 
+
+The Dataset contains 10 sequences showing 5 scenes. Each scene is rendered twice: with a static point of view and a dynamic camera to simulate drone/UAV based surveillance. We render at HD resolution (1280x720) at 25 fps, which is typical for current commercial CCTV surveillance systems. The total number of frames 3200.
+
+For each sequence we provide the following **ground-truth data**:
+ * **Optical flow fields** 
+ * **Person trajectories (up to 1451)**
+ * **Dense pixel trajectories**
 
 This evaluation framework is released under the MIT License (details in [LICENSE](LICENSE)).
 If you use the dataset or evaluation kit or think our work is useful in your research, please consider citing:
@@ -33,7 +40,7 @@ unrar x TUBCrowdFlow
 ## Contact
 If you have any questions or encounter problems regarding the method/code or want to send us your optical flow benchmark 
 results feel free to contact me
-at [senst@nue.tu-berlin.de](mailto:senst@nue.tu-berlin.de)
+at [tobias.senst@gmail.com](mailto:tobias.senst@gmail.com)
 
 ### Installation
 Minimum required python version: 3.5
@@ -73,6 +80,8 @@ The optical flow files will be stored in the directory `/estimate/dual/` .
 
 **Short-Term Evaluation**
 
+Short-term evaluation performs classical approch for optical flow evaluation, i.e. measures based on ground-truth optical flow fields (e.g. end-point error, RX measures)
+
 `
 opticalflow_evaluate.py <dataset_root_path> <dir_name_method_1> <dir_name_method_2> ... <dir_name_method_n> 
 `
@@ -86,6 +95,8 @@ After execution the file *short_term_results.tex* will contain the evaluation re
 *short_term_results.pb* will contain the evaluation results stored with pickle.
 
 **Long-Term  Evaluate**
+
+Long-term evaluation performs evaluation based on ground-truth trajectories, i.e. **person trajectories** and **dense pixel trajectories** (see paper).
 
 `
 trajectory_evaluate.py <dataset_root_path> <dir_name_method_1> <dir_name_method_2> ... <dir_name_method_n>
