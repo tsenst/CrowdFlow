@@ -22,15 +22,10 @@ If you use the dataset or evaluation kit or think our work is useful in your res
 }
 ```
 
-Download the dataset via:
-```
-wget http://ftp01.nue.tu-berlin.de/crowdflow/TUBCrowdFlow.rar
-```
-or use the following direct links
- - [http://ftp01.nue.tu-berlin.de/crowdflow/TUBCrowdFlow.rar](http://ftp01.nue.tu-berlin.de/crowdflow/TUBCrowdFlow.rar)
- - [https://tubcloud.tu-berlin.de/s/FrDpjGfGJgPmHzN](https://tubcloud.tu-berlin.de/s/FrDpjGfGJgPmHzN)
- 
-and unpack it:
+Download the dataset via the following direct links
+ - [https://hidrive.ionos.com/lnk/LUiCHfYG](https://hidrive.ionos.com/lnk/LUiCHfYG)
+the password is the case sensitive name of the repository.
+Unpack the dataset by:
 ```
 sudo apt-get install unrar
 unrar x TUBCrowdFlow
