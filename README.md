@@ -22,9 +22,11 @@ If you use the dataset or evaluation kit or think our work is useful in your res
 }
 ```
 
-Download the dataset via the following direct links
+Download the dataset via the following direct link
  - [https://hidrive.ionos.com/lnk/LUiCHfYG](https://hidrive.ionos.com/lnk/LUiCHfYG)
-the password is the case sensitive name of the repository.
+   
+The password is the case sensitive name of the repository.
+
 Unpack the dataset by:
 ```
 sudo apt-get install unrar
